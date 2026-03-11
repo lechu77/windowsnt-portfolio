@@ -1045,10 +1045,10 @@ function MyComputerWindow({ onOpen }) {
       description: 'A quick summary of what I bring to a team.',
     },
     {
-      icon: HardDrive,
-      label: 'Cloud Control',
-      action: 'cloud',
-      description: 'See hosting, storage, and deployment choices.',
+  icon: Globe,
+  label: 'Network Status',
+  action: 'network',
+  description: 'See the live hosting and delivery setup.',
     },
   ];
 
@@ -1098,6 +1098,51 @@ function WhyHireMeWindow() {
         <li>Strong fit for teams that value adaptability, ownership, documentation, and learning speed.</li>
         <li>Growing cloud and AI interest grounded in real implementation, not hype.</li>
       </ul>
+    </div>
+  );
+}
+
+function NetworkStatusWindow() {
+  const rows = [
+    ['Hostname', 'matias.is-a.dev'],
+    ['Deployment', 'Cloudflare Pages'],
+    ['Edge Network', 'Cloudflare CDN'],
+    ['Object Storage', 'Cloudflare R2'],
+    ['Source Control', 'GitHub'],
+    ['Status', 'Connected'],
+    ['Latency', '~30ms (edge cached)'],
+  ];
+
+  return (
+    <div className="text-sm bg-white border border-neutral-700 p-4 min-h-[280px] overflow-auto">
+      <div className="font-bold mb-2">Network Configuration</div>
+
+      <p className="mb-4">
+        This panel summarizes the live hosting and delivery setup behind the portfolio.
+      </p>
+
+      <div className="grid grid-cols-[140px_1fr] border border-neutral-500">
+        {rows.map(([label, value], index) => (
+          <React.Fragment key={label}>
+            <div
+              className={cn(
+                'px-3 py-2 border-r border-b border-neutral-300 font-bold bg-[#efefef]',
+                index === rows.length - 1 ? 'border-b-0' : ''
+              )}
+            >
+              {label}
+            </div>
+            <div
+              className={cn(
+                'px-3 py-2 border-b border-neutral-300',
+                index === rows.length - 1 ? 'border-b-0' : ''
+              )}
+            >
+              {value}
+            </div>
+          </React.Fragment>
+        ))}
+      </div>
     </div>
   );
 }
@@ -1201,7 +1246,7 @@ function DosPromptWindow() {
     '(C)Copyright Menarguez Corp 1984-1998.',
     '',
     'C:\\> help',
-    'Available commands: help, whoami, skills, cloud, ai, projects, contact, systeminfo, ipconfig, aws s3 ls, terraform plan, kubectl get pods, clear',
+    'Available commands: help, whoami, skills, cloud, ai, projects, contact, systeminfo, ipconfig, ping matias.is-a.dev, aws s3 ls, terraform plan, kubectl get pods, clear',
   ]);
   const [input, setInput] = useState('');
   const outputRef = useRef(null);
@@ -1220,7 +1265,7 @@ function DosPromptWindow() {
 
   if (command === 'help') {
     lines.push(
-      'Available commands: help, whoami, skills, cloud, ai, projects, contact, systeminfo, ipconfig, aws s3 ls, terraform plan, kubectl get pods, clear'
+      'Available commands: help, whoami, skills, cloud, ai, projects, contact, systeminfo, ipconfig, ping matias.is-a.dev, aws s3 ls, terraform plan, kubectl get pods, clear'
     );
   } else if (command === 'whoami') {
     lines.push('matias.menarguez');
@@ -1251,14 +1296,15 @@ function DosPromptWindow() {
   } else if (command === 'systeminfo') {
     lines.push('Host Name:                 MATIAS');
     lines.push('OS Name:                   Matias Menarguez OS Portfolio Edition');
-    lines.push('OS Version:                4.10.1998 Build Portfolio');
-    lines.push('System Manufacturer:       Custom Build');
-    lines.push('System Model:              Browser Virtual Machine');
+    lines.push('Architecture:              React + Vite');
+    lines.push('Frontend Framework:        React');
+    lines.push('Hosting:                   Cloudflare Pages');
+    lines.push('Media Storage:             Cloudflare R2');
+    lines.push('CI/CD:                     GitHub → Cloudflare Deploy');
+    lines.push('Domain:                    matias.is-a.dev');
     lines.push('Processor(s):              1 Processor Installed');
-    lines.push('                           [01]: JavaScript Runtime');
-    lines.push('Memory:                    4 MB Retro RAM');
-    lines.push('Domain:                    WORKGROUP');
-  } else if (command === 'ipconfig') {
+    lines.push('Memory:                    4 MB-ish RAM');
+    } else if (command === 'ipconfig') {
     lines.push('Matias Menarguez OS IP Configuration');
     lines.push('');
     lines.push('Ethernet adapter Portfolio NIC:');
@@ -1284,6 +1330,14 @@ function DosPromptWindow() {
     lines.push('portfolio-web-7f9c8d          1/1     Running   0          12d');
     lines.push('prompt-lab-56b4d2             1/1     Running   0          5d');
     lines.push('metrics-agent-2aa91f          1/1     Running   1          18d');
+    } else if (command === 'ping matias.is-a.dev') {
+    lines.push('Pinging matias.is-a.dev...');
+    lines.push('');
+    lines.push('Reply from Cloudflare Edge: time=28ms');
+    lines.push('Reply from Cloudflare Edge: time=24ms');
+    lines.push('Reply from Cloudflare Edge: time=26ms');
+    lines.push('');
+    lines.push('Connection stable.');
   } else if (command === 'clear') {
     setHistory([]);
     return;
@@ -1392,6 +1446,7 @@ function StartMenu({ onOpen }) {
     { label: 'Internet Explorer', id: 'internet' },
     { label: 'MS-DOS', id: 'dos' },
     { label: 'Cloud Control Panel', id: 'cloud' },
+    { label: 'Network Status', id: 'network' },
     { label: 'About This...', id: 'about' },
     { label: 'Shut Down...', id: 'shutdown' },
   ];
@@ -1499,6 +1554,7 @@ const [zTop, setZTop] = useState(30);
     dos: { title: 'MS-DOS Prompt', left: 220, top: 120, width: 620 },
     cloud: { title: 'System Properties / Cloud Control Panel', left: 260, top: 120, width: 720 },
     whyhireme: { title: 'Why hire me? - Notepad', left: 260, top: 150, width: 560 },
+    network: { title: 'Network Status', left: 280, top: 140, width: 620 },
   }[type];
 
   if (!config) return;
@@ -1694,6 +1750,7 @@ const updateWindowPosition = (id, pos) => {
             {w.type === 'dos' && <DosPromptWindow />}
             {w.type === 'cloud' && <CloudControlPanel />}
             {w.type === 'whyhireme' && <WhyHireMeWindow />}
+            {w.type === 'network' && <NetworkStatusWindow />}
           </Window98>
         ))}
       </AnimatePresence>
