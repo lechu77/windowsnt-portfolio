@@ -16,6 +16,12 @@ const SECTIONS = {
 };
 
 async function universalSetup() {
+  if (fs.existsSync(CONFIG_PATH)) {
+    console.log('ℹ️ src/config.js already exists. Skipping setup to avoid overwriting your changes.');
+    console.log('💡 If you want to regenerate it, delete src/config.js first.');
+    return;
+  }
+
   if (!fs.existsSync(PDF_PATH)) {
     console.error('❌ Error: public/cv.pdf not found.');
     process.exit(1);
