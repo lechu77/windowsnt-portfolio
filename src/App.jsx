@@ -201,7 +201,7 @@ const WindowsLogo = () => (
 
 function BootScreen({ onComplete }) {
   useEffect(() => {
-    const t = setTimeout(onComplete, 3500);
+    const t = setTimeout(onComplete, 2000);
     return () => clearTimeout(t);
   }, [onComplete]);
 
@@ -218,16 +218,15 @@ function BootScreen({ onComplete }) {
             Built on NT Technology
           </div>
         </div>
-        
+
         <div className="space-y-2 font-sans text-sm">
           <div className="flex justify-between items-center h-6 border border-[#404040] p-[2px]">
-             <motion.div 
+             <motion.div
                initial={{ width: 0 }}
                animate={{ width: "100%" }}
-               transition={{ duration: 3, ease: "linear" }}
+               transition={{ duration: 1.5, ease: "linear" }}
                className="h-full bg-blue-700 shadow-[0_0_10px_rgba(0,0,255,0.5)]"
-             />
-          </div>
+             />          </div>
           <div className="flex justify-between text-[10px] uppercase tracking-widest opacity-50 px-1">
             <span>Initializing...</span>
             <span>Please wait</span>
@@ -259,7 +258,7 @@ function ResumeDoc({ resume }) {
           <span className="text-neutral-300">|</span>
           <a href={resume.certifications[0]?.link} target="_blank" rel="noopener noreferrer" className="text-blue-800 underline font-bold">Certification Badges</a>
           <span className="text-neutral-300">|</span>
-          <a href={resume.cvPath} download className="text-blue-800 underline font-bold">Download PDF</a>
+          <a href={resume.cvPath} download="Matias_Carlos_Siri_Brenta_CV-EUROPASS.pdf" className="text-blue-800 underline font-bold">Download PDF</a>
         </div>
       </div>
 

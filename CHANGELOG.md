@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2026-03-12
+
+### Added
+- **Visual Identity**: Replaced default Vite favicon with an authentic 4-color Windows logo SVG to match the Start button.
+
+## [1.2.0] - 2026-03-12
+
+### Changed
+- **UX Polish**: Custom CV download filename for better professional identification (`Matias_Carlos_Siri_Brenta_CV-EUROPASS.pdf`).
+- **Performance**: Optimized boot sequence speed (reduced from 3.5s to 2s) for faster access while maintaining the retro aesthetic.
+
 ## [1.1.0] - 2026-03-12
 
 ### Added
