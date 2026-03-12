@@ -34,6 +34,31 @@ Original project by **Matias Menarguez**: [win98-portfolio](https://github.com/m
 npm run dev
 ```
 
+## ☁️ Deployment (Cloudflare Pages)
+
+This portfolio is built with Vite and is ready to be hosted on **Cloudflare Pages**.
+
+### Option 1: Automatic Deployment (Recommended)
+1.  Push your code to **GitHub**.
+2.  Log in to the [Cloudflare Dashboard](https://dash.cloudflare.com/).
+3.  Go to **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
+4.  Select your repository and use the following build settings:
+    - **Framework preset**: `Vite`
+    - **Build command**: `npm run setup && npm run build`
+    - **Build output directory**: `dist`
+5.  Click **Save and Deploy**.
+
+### Option 2: Manual Deployment (CLI)
+If you prefer the command line, use [Wrangler](https://developers.cloudflare.com/workers/wrangler/):
+```bash
+# Run setup and build locally
+npm run setup
+npm run build
+
+# Deploy to Cloudflare
+npx wrangler pages deploy dist
+```
+
 ## Customization
 
 After running `npm run setup`, you can fine-tune your details in `src/config.js` (e.g., adding your nickname or specific Credly links).
