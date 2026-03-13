@@ -2,9 +2,9 @@
 
 A professional, high-fidelity Windows NT Server 4.0 inspired interactive resume built with React. This is a highly automated, portable portfolio designed for IT professionals and systems administrators who appreciate the classic "server room" aesthetic.
 
-## 🚀 Magic Setup (The 2-Step Deployment)
+## 🚀 Local Setup (Mandatory)
 
-This project is designed to be fully portable. You don't need to edit complex JSON files manually.
+This project is designed to be fully portable, but requires an **interactive setup** to generate your personal configuration before deployment.
 
 1.  **Install Dependencies**:
     ```bash
@@ -15,7 +15,9 @@ This project is designed to be fully portable. You don't need to edit complex JS
     npm run setup
     ```
 
-**What happens next?** Our "Magic Setup" script (powered by `cheerio`) will connect to your **Europass Shared Profile URL**, automatically scrape your experience, skills, and certifications, and configure the entire portfolio for you. The script is interactive and will ask for your preferred name, nickname, and profile links (LinkedIn, Credly).
+**What happens?** The `setup` script will connect to your **Europass Shared Profile URL**, scrape your data, and prompt you for your preferred name, nickname, and profile links (LinkedIn, Credly). This generates `src/config.js`, which serves as the data source for the entire site. 
+
+**Important**: You must **commit and push** the generated `src/config.js` to your repository for the site to work in production.
 
 ## Credits
 
@@ -40,9 +42,9 @@ npm run dev
 
 ## ☁️ Deployment (Cloudflare Pages)
 
-This portfolio is built with Vite and is ready to be hosted on **Cloudflare Pages**.
+Since the setup is interactive, it **cannot** be run during the build process on Cloudflare. You must run the setup locally and commit the result.
 
 ### Build Settings:
 - **Framework preset**: `Vite`
-- **Build command**: `npm run setup && npm run build`
+- **Build command**: `npm run build`
 - **Build output directory**: `dist`
