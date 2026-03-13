@@ -249,16 +249,36 @@ function ResumeDoc({ resume }) {
     <div className="bg-white border border-black h-[70vh] text-black p-8 shadow-inner overflow-auto font-sans">
       {/* Header */}
       <div className="text-center border-b-2 border-black pb-6 mb-8">
-        <h1 className="text-4xl font-bold tracking-tighter uppercase">{resume.name} "{resume.nickname}" {resume.surname}</h1>
+        <h1 className="text-4xl font-bold tracking-tighter uppercase">
+          {resume.name} {resume.nickname ? `"${resume.nickname}"` : ''} {resume.surname}
+        </h1>
         <p className="text-lg font-bold text-neutral-700 mt-1">{resume.title}</p>
-        <div className="flex justify-center gap-4 mt-3 text-sm">
-          <span>{resume.email}</span>
-          <span className="text-neutral-300">|</span>
-          <a href={resume.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-800 underline font-bold">LinkedIn Profile</a>
-          <span className="text-neutral-300">|</span>
-          <a href={resume.certifications[0]?.link} target="_blank" rel="noopener noreferrer" className="text-blue-800 underline font-bold">Certification Badges</a>
-          <span className="text-neutral-300">|</span>
-          <a href={resume.cvPath} download="Matias_Carlos_Siri_Brenta_CV-EUROPASS.pdf" className="text-blue-800 underline font-bold">Download PDF</a>
+        <div className="flex justify-center flex-wrap gap-4 mt-3 text-sm">
+          {resume.email && (
+            <>
+              <span>{resume.email}</span>
+              <span className="text-neutral-300">|</span>
+            </>
+          )}
+          {resume.linkedin && (
+            <>
+              <a href={resume.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-800 underline font-bold">LinkedIn Profile</a>
+              <span className="text-neutral-300">|</span>
+            </>
+          )}
+          {resume.credly && (
+            <>
+              <a href={resume.credly} target="_blank" rel="noopener noreferrer" className="text-blue-800 underline font-bold">Certification Badges</a>
+              <span className="text-neutral-300">|</span>
+            </>
+          )}
+          {resume.europassUrl && (
+            <>
+              <a href={resume.europassUrl} target="_blank" rel="noopener noreferrer" className="text-blue-800 underline font-bold">Europass Profile</a>
+              <span className="text-neutral-300">|</span>
+            </>
+          )}
+          <a href={resume.cvPath} download="CV-Portfolio.pdf" className="text-blue-800 underline font-bold">Download PDF</a>
         </div>
       </div>
 
@@ -1047,8 +1067,8 @@ function DosPromptWindow() {
   } else if (command === 'projects') {
     lines.push('Technical projects and infrastructure documentation.');
   } else if (command === 'contact') {
-    lines.push(`Email: ${CONFIG.email}`);
-    lines.push(`LinkedIn: ${CONFIG.linkedin}`);
+    if (CONFIG.email) lines.push(`Email: ${CONFIG.email}`);
+    if (CONFIG.linkedin) lines.push(`LinkedIn: ${CONFIG.linkedin}`);
   } else if (command === 'systeminfo') {
     lines.push('Host Name:                 WINNT-SERVER');
     lines.push('OS Name:                   Windows NT Server');

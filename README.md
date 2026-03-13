@@ -6,14 +6,16 @@ A professional, high-fidelity Windows NT Server 4.0 inspired interactive resume 
 
 This project is designed to be fully portable. You don't need to edit complex JSON files manually.
 
-1.  **Add your CV**: Copy your **Europass CV (PDF)** to `public/cv.pdf`.
-2.  **Run Setup**:
+1.  **Install Dependencies**:
     ```bash
     npm install
+    ```
+2.  **Run Interactive Setup**:
+    ```bash
     npm run setup
     ```
 
-**What happens next?** Our "Magic Setup" script (powered by `pdf-parse`) will automatically scan your PDF, extract your experience, skills, and certifications, and configure the entire portfolio for you.
+**What happens next?** Our "Magic Setup" script (powered by `cheerio`) will connect to your **Europass Shared Profile URL**, automatically scrape your experience, skills, and certifications, and configure the entire portfolio for you. The script is interactive and will ask for your preferred name, nickname, and profile links (LinkedIn, Credly).
 
 ## Credits
 
@@ -23,9 +25,10 @@ This project is a customized, highly automated fork of [matumenar84's win98-port
 
 - **High-Fidelity NT 4.0 Interface**: Professional "High-Color" UI with Tahoma typography, 3D beveled borders, and smooth gradients.
 - **Authentic Start Menu**: Featuring the classic 4-color Windows logo and NT-style vertical branding.
-- **Universal Europass Parser**: Automated data extraction from standard Europass PDFs.
-- **Structured Resume Window**: A crisp "Resume.doc" experience based on your actual data.
-- **Certification Badges**: Automated extraction and display of your professional credentials.
+- **Universal Europass Scraper**: Automated data extraction from shared Europass Profile URLs.
+- **Interactive Configuration**: Smart setup script that remembers your previous settings.
+- **Structured Resume Window**: A crisp "Resume.doc" experience with integrated links to LinkedIn, Credly, and your original Europass profile.
+- **Certification Badges**: Automated extraction and display of your professional credentials with verification support.
 - **Retro Boot Experience**: Authentic Windows NT Server 4.0 boot sequence.
 - **Fully Static**: Zero external cloud dependencies, optimized for Cloudflare Pages.
 
